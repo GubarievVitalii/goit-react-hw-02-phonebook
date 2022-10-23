@@ -3,14 +3,16 @@ import s from './Form.module.css';
 
 const Form = ({ name, number, onInputChange, onAddContact }) => {
   return (
-    <form
+      <form
+          className={s.form}
       onSubmit={event => {
         event.preventDefault();
         onAddContact(name, number);
       }}
     >
       <label>
-        <input
+              <input
+                  className={s.input}
           value={name}
           onChange={onInputChange}
           type="text"
@@ -21,7 +23,8 @@ const Form = ({ name, number, onInputChange, onAddContact }) => {
         />
       </label>
       <label>
-        <input
+              <input
+                  className={s.input}
           value={number}
           onChange={onInputChange}
           type="tel"
@@ -31,7 +34,7 @@ const Form = ({ name, number, onInputChange, onAddContact }) => {
           required
         />
       </label>
-      <button type="submit">Add contact</button>
+      <button className={s.btn} type="submit">Add contact</button>
     </form>
   );
 };

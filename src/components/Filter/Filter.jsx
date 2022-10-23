@@ -5,7 +5,7 @@ const Filter = ({ onFilterContact, filter }) => {
     return (
         <div>
             <p>Find contacts by name</p>
-            <input type="text" name="filter" value={filter} onChange={onFilterContact} />
+            <input className={s.input} type="text" name="filter" value={filter} onChange={onFilterContact} />
         </div>
     )
 }

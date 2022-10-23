@@ -4,9 +4,9 @@ import s from './Contacts.module.css';
 const Contacts = ({ contacts, deteteContact }) => {
   return (
     <>
-      <ul className={s.contacts}>
+      <ul className={s.contactsList}>
         {contacts.map(({ id, name, number }) => (
-          <li key={id}>
+          <li className={s.item} key={id}>
             <p>
                     {name} - {number}
                     <button onClick={() => deteteContact(id)}>Delete</button>
