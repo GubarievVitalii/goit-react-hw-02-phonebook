@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import Contacts from './Contacts/Contacts';
-import Form from './Form/Form';
-import Filter from './Filter/Filter';
 import { nanoid } from 'nanoid';
+import s from './App.module.css';
+import Contacts from '../Contacts/Contacts';
+import Form from '../Form/Form';
+import Filter from '../Filter/Filter';
+
 
 class App extends Component {
   state = {
@@ -12,15 +14,10 @@ class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
-    filter: '',
-    name: '',
-    number: '',
+    filter: ''
   };
 
-  onInputChange = event =>
-    this.setState({ [event.target.name]: event.target.value });
-  
-  onAddContact = (name, number) => {
+    onAddContact = (name, number) => {
     const newContact = this.state.contacts.find(el => el.name.toLowerCase() === name.toLowerCase())
     if (newContact) {
     alert(`${name} is already is in contacts.`);
@@ -36,20 +33,21 @@ class App extends Component {
   };
 
   render() {
-    const { contacts, name, number, filter } = this.state;
+    const { contacts, filter } = this.state;
     const filteredContacts = contacts.filter(({name})=>name.toLowerCase().includes(filter.toLowerCase()))
     return (
       <div>
-        <h1>Phonebook</h1>
+        <div  className={s.wrapper}>
+        <h1 className={s.title}>Phonebook</h1>
           <Form
-            onInputChange={this.onInputChange}
-            name={name}
-            number={number}
             onAddContact={this.onAddContact}
           />
-        <h2>Contacts</h2>
+          </div>
+        <div  className={s.wrapper}>
+        <h2 className={s.title}>Contacts</h2>
           <Filter onFilterContact={this.onFilterContact} filter={filter}/>
-        <Contacts contacts={filteredContacts} deteteContact={this.deteteContact}/>        
+          <Contacts contacts={filteredContacts} deteteContact={this.deteteContact} />
+        </div>  
       </div>
     );
   }

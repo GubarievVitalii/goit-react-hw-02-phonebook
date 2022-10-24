@@ -1,20 +1,35 @@
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import s from './Form.module.css';
 
-const Form = ({ name, number, onInputChange, onAddContact }) => {
-  return (
+class Form extends Component {
+  state = {
+    name: '',
+    number: '',
+  };
+
+  onInputChange = event =>
+    this.setState({ [event.target.name]: event.target.value });
+  
+  reset = () => this.setState({ name: '', number: ''})
+
+  render() {
+    const { onAddContact } = this.props;
+    const { name, number } = this.state;
+    return (
       <form
           className={s.form}
       onSubmit={event => {
         event.preventDefault();
         onAddContact(name, number);
+        this.reset();
       }}
-    >
+      >
       <label>
               <input
                   className={s.input}
           value={name}
-          onChange={onInputChange}
+          onChange={this.onInputChange}
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -26,7 +41,7 @@ const Form = ({ name, number, onInputChange, onAddContact }) => {
               <input
                   className={s.input}
           value={number}
-          onChange={onInputChange}
+          onChange={this.onInputChange}
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -37,13 +52,11 @@ const Form = ({ name, number, onInputChange, onAddContact }) => {
       <button className={s.btn} type="submit">Add contact</button>
     </form>
   );
+  }
 };
 
 Form.propTypes = {
-    name: PropTypes.string.isRequired,
-    number: PropTypes.string.isRequired,
-    onInputChange: PropTypes.func,
-    onAddContact: PropTypes.func,
+    onAddContact: PropTypes.func.isRequired,
 };
 
 export default Form;

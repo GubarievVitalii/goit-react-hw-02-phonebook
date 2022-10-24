@@ -7,10 +7,10 @@ const Contacts = ({ contacts, deteteContact }) => {
       <ul className={s.contactsList}>
         {contacts.map(({ id, name, number }) => (
           <li className={s.item} key={id}>
-            <p>
-                    {name} - {number}
-                    <button onClick={() => deteteContact(id)}>Delete</button>
-            </p>
+            <span className={s.contact}>
+                    {name} - {number}                    
+            </span>
+            <button className={s.btn} onClick={() => deteteContact(id)}>Delete</button>
           </li>
         ))}
       </ul>
